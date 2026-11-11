@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnFragmentDua.setOnClickListener {
-            // replaceFragment(fDua())
+            replaceFragment(fDua())
         }
 
         if(savedInstanceState == null){
