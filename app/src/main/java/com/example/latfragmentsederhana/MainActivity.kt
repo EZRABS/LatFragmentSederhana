@@ -1,12 +1,23 @@
 package com.example.latfragmentsederhana
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -15,6 +26,21 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val btnFragmentSatu = findViewById<Button>(R.id.btnFragmentSatu)
+        val btnFragmentDua = findViewById<Button>(R.id.btnFragmentDua)
+
+        btnFragmentSatu.setOnClickListener {
+            replaceFragment(fSatu())
+        }
+
+        btnFragmentDua.setOnClickListener {
+            // replaceFragment(fDua())
+        }
+
+        if(savedInstanceState == null){
+            replaceFragment(fSatu())
         }
     }
 }
